@@ -26,7 +26,6 @@ function App() {
         })
         const returnedDate = await res.json();
         console.log('returnedDate', returnedDate)
-        
       } catch (err) {
 
       };
