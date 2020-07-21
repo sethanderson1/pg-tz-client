@@ -12,8 +12,9 @@ function App() {
   
   useEffect(() => {
     console.log('useEffect ran')
+    
 
-    async function postDate(date) {
+    async function getDates() {
       const url = `https://young-lake-61831.herokuapp.com/`
       
       try {
@@ -26,12 +27,19 @@ function App() {
         })
         const returnedDate = await res.json();
         console.log('returnedDate', returnedDate)
+        const localReturnedTimestamp = dayjs(returnedDate.timestamp).format()
+        const localReturnedTimestamptz = dayjs(returnedDate.timestamptz).format()
+        const localReturnedLocal = dayjs(returnedDate.local).format()
+        
+        console.log('localReturnedTimestamp', localReturnedTimestamp)
+        console.log('localReturnedTimestamptz', localReturnedTimestamptz)
+        console.log('localReturnedLocal', localReturnedLocal)
       } catch (err) {
 
       };
     };
 
-    postDate(date)
+    getDates()
   }, [])
 
 
