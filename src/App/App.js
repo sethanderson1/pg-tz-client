@@ -19,27 +19,66 @@ function App() {
       const url = `https://young-lake-61831.herokuapp.com/`
 
       try {
+
+
+        const userInputDate = dayjs().format() // this should be local
         const res = await fetch(url, {
-          method: "GET",
+          method: "POST",
           headers: {
             "content-type": "application/json"
           },
-          // body: JSON.stringify(date)
+          // body: userInputDate,
+          // body: JSON.stringify(userInputDate),
+          body: {
+            timestamp: userInputDate
+          }
         })
         const returnedDate = await res.json();
         console.log('returnedDate', returnedDate)
         const convertedToLocalTimestamp = dayjs(returnedDate.timestamp).format()
         const convertedToLocalTimestamptz = dayjs(returnedDate.timestamptz).format()
-
         returnedDate.convertedToLocalTimestamp = convertedToLocalTimestamp
         returnedDate.convertedToLocalTimestamptz = convertedToLocalTimestamptz
         const listDates = () => {
           return Object.entries(returnedDate)
-            .map(date => (<li >{date[0] + '....' + date[1]}</li>))
+            .map(date => (<li>{date[0] + '....' + date[1]}</li>))
         }
         setDates(listDates())
         console.log('convertedToLocalTimestamp', convertedToLocalTimestamp)
         console.log('convertedToLocalTimestamptz', convertedToLocalTimestamptz)
+
+
+
+
+
+
+
+        // const res = await fetch(url, {
+        //   method: "GET",
+        //   headers: {
+        //     "content-type": "application/json"
+        //   },
+        //   // body: JSON.stringify(date)
+        // })
+        // const returnedDate = await res.json();
+        // console.log('returnedDate', returnedDate)
+        // const convertedToLocalTimestamp = dayjs(returnedDate.timestamp).format()
+        // const convertedToLocalTimestamptz = dayjs(returnedDate.timestamptz).format()
+
+        // returnedDate.convertedToLocalTimestamp = convertedToLocalTimestamp
+        // returnedDate.convertedToLocalTimestamptz = convertedToLocalTimestamptz
+        // const listDates = () => {
+        //   return Object.entries(returnedDate)
+        //     .map(date => (<li>{date[0] + '....' + date[1]}</li>))
+        // }
+        // setDates(listDates())
+        // console.log('convertedToLocalTimestamp', convertedToLocalTimestamp)
+        // console.log('convertedToLocalTimestamptz', convertedToLocalTimestamptz)
+
+
+
+
+
       } catch (err) {
 
       };
